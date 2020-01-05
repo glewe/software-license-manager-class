@@ -43,7 +43,11 @@ This method will check whether the current domain is registered for the license.
 ```php
 $LIC->setKey('5766474b540');
 $LIC->load();
-echo $LIC->domainRegistered();
+if ($LIC->domainRegistered()) {
+   echo "Domain is registered";
+else {   
+   echo "Domain is not registered";
+}
 ```
 ## $LIC->getKey() ##
 This method will retrieve the class viarable 'key' that is supposed to hold the license key. Example:
