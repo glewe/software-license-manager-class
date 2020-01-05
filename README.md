@@ -23,7 +23,7 @@ The status() method returns one of these these values:
 - invalid (an empty or invalid license key was submitted)
 - pending (the license is valid but not activated yet)
 - unregisterd (the license is active but not registered for the domain the validation request came from)
-## Bootstrap 4 ##
+## $LIC->show() ##
 The $LIC->show() method assumes that you use Bootstrap 4 in your PHP application.
 ## Credits ##
 Thanks to [Tips and Tricks HQ](https://www.tipsandtricks-hq.com/software-license-manager-plugin-for-wordpress) for Software License Manager Plugin for WordPress
