@@ -56,7 +56,7 @@ $LIC->setKey('5766474b540');
 echo $LIC->getKey();
 ```
 ## $LIC->load() ##
-This method will load trhe license details from the license server. Example:
+This method will load the license details from the license server. Example:
 ```php
 $LIC->setKey('5766474b540');
 $LIC->load();
@@ -77,12 +77,12 @@ $LIC->show($LIC->details, true);
 ```
 ## $LIC->status() ##
 The status() method returns one of these these values:
-- active (the license is active and registered for the domain the validation request came from)
-- blocked (the license is blocked)
-- expired (the license is expired)
-- invalid (an empty or invalid license key was submitted)
-- pending (the license is valid but not activated yet)
-- unregisterd (the license is active but not registered for the domain the validation request came from)
+- _active_ (the license is active and registered for the domain the validation request came from)
+- _blocked_ (the license is blocked)
+- _expired_ (the license is expired)
+- _invalid_ (an empty or invalid license key was submitted)
+- _pending_ (the license is valid but not activated yet)
+- _unregisterd_ (the license is active but not registered for the domain the validation request came from)
 Example:
 ```php
 $LIC->setKey('5766474b540');
