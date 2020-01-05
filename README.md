@@ -14,6 +14,15 @@ This class can be used in a PHP application to contact a WordPress based license
   - $LIC->deactivate();
   - $LIC->domainRegistered();
   - $LIC->show();
+  - $LIC-status();
+## $LIC->status() ##
+The status() method returns one of these these values:
+- active (the license is active and registered for the domain the validation request came from)
+- blocked (the license is blocked)
+- expired (the license is expired)
+- invalid (an empty or invalid license key was submitted)
+- pending (the license is valid but not activated yet)
+- unregisterd (the license is active but not registered for the domain the validation request came from)
 ## Bootstrap 4 ##
 The $LIC->show() method assumes that you use Bootstrap 4 in your PHP application.
 ## Credits ##
