@@ -9,11 +9,11 @@ This class can be used in a PHP application to contact a WordPress based license
 - Set the license key property, e.g. $LIC->setKey('5766474b540');
 - Load the details for that license from the license server, e.g. $LIC->load();
 - Use other methods as needed, e.g.:
--- $LIC->activate();
--- $LIC->daysToExpiry();
--- $LIC->deactivate();
--- $LIC->domainRegistered();
--- $LIC->show();
+  - $LIC->activate();
+  - $LIC->daysToExpiry();
+  - $LIC->deactivate();
+  - $LIC->domainRegistered();
+  - $LIC->show();
 ## Bootstrap 4 ##
 The $LIC->show() method assumes that you use Bootstrap 4 in your PHP application.
 ## Credits ##
