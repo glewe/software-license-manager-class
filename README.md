@@ -5,16 +5,16 @@ This class can be used in a PHP application to contact a WordPress based license
 - Install the Software License Manager Plugin on that server
 - Include my class in your PHP application
 - Change the const variables in the class to match your license server settings
-- Instantiate the class in your script, e.g. $LIC = new SoftwareLicenseManager();
-- Set the license key property, e.g. $LIC->setKey('5766474b540');
-- Load the details for that license from the license server, e.g. $LIC->load();
+- Instantiate the class in your script, e.g. `$LIC = new SoftwareLicenseManager();`
+- Set the license key property, e.g. `$LIC->setKey('5766474b540');`
+- Load the details for that license from the license server, e.g. `$LIC->load();`
 - Use other methods as needed, e.g.:
-  - $LIC->activate();
-  - $LIC->daysToExpiry();
-  - $LIC->deactivate();
-  - $LIC->domainRegistered();
-  - $LIC->show();
-  - $LIC-status();
+  - `$LIC->activate();`
+  - `$LIC->daysToExpiry();`
+  - `$LIC->deactivate();`
+  - `$LIC->domainRegistered();`
+  - `$LIC->show();`
+  - `$LIC-status();`
 ## $LIC->status() ##
 The status() method returns one of these these values:
 - active (the license is active and registered for the domain the validation request came from)
