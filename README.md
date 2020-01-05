@@ -20,7 +20,7 @@ This class can be used in a PHP application to contact a WordPress based license
   - `$LIC->show();`
   - `$LIC-status();`
 ## $LIC->activate() ##
-This method will sumbit the license key in $this->key to the license server for activation. Example:
+This method will sumbit the license key in $this->key to the license server for activation plus domain registration. Example:
 ```php
 $LIC->setKey('5766474b540');
 $LIC->activate();
@@ -90,5 +90,5 @@ $LIC->load();
 echo $LIC->status();
 ```
 ## Credits ##
-Thanks to [Tips and Tricks HQ](https://www.tipsandtricks-hq.com/software-license-manager-plugin-for-wordpress) for Software License Manager Plugin for WordPress
+Thanks to [Tips and Tricks HQ](https://www.tipsandtricks-hq.com/software-license-manager-plugin-for-wordpress) for the Software License Manager Plugin for WordPress
 

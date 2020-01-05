@@ -404,7 +404,7 @@ class SoftwareLicenseManager
 
    // ---------------------------------------------------------------------------
    /**
-    * Get status
+    * Get license status
     *
     * @return string  active/blocked/invalid/expired/pending/unregistered
     */
