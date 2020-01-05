@@ -1,4 +1,4 @@
-# Software Licenese Manager PHP Class
+# Software License Manager PHP Class #
 This class can be used in a PHP application to contact a WordPress based license server using the free [Software License Manager Plugin](https://wordpress.org/plugins/software-license-manager/).
 ## Usage ##
 - Install WordPress on your license server
