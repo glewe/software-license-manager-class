@@ -245,6 +245,17 @@ class SoftwareLicenseManager
       $this->details = $response;
    }
  
+   // ---------------------------------------------------------------------------
+   /**
+    * Reads the class license key property
+    *
+    * @return string
+    */
+   function getKey()
+   {
+      return $this->key;
+   }
+
    // ---------------------------------------------------------------------
    /**
     * Reads the license key from the database
@@ -272,17 +283,6 @@ class SoftwareLicenseManager
    }
 
    // ---------------------------------------------------------------------------
-   /**
-    * Reads the class license key property
-    *
-    * @return string
-    */
-   function getKey()
-   {
-      return $this->key;
-   }
-
-    // ---------------------------------------------------------------------------
    /**
     * Sets the class license key property
     *

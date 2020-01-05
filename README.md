@@ -16,9 +16,11 @@ This class can be used in a PHP application to contact a WordPress based license
   - `$LIC->domainRegistered();`
   - `$LIC->getKey();`
   - `$LIC->load();`
+  - `$LIC->readKey();`
+  - `$LIC->saveKey();`
   - `$LIC->setKey('5766474b540');`
   - `$LIC->show();`
-  - `$LIC-status();`
+  - `$LIC->status();`
 ## $LIC->activate() ##
 This method will sumbit the license key in $this->key to the license server for activation plus domain registration. Example:
 ```php
@@ -61,6 +63,10 @@ This method will load the license details from the license server. Example:
 $LIC->setKey('5766474b540');
 $LIC->load();
 ```
+## $LIC->readKey() ##
+This method is a placeholder for code you might want to add to read the license key from your own database.
+## $LIC->saveKey() ##
+This method is a placeholder for code you might want to add to save the license key to your own database.
 ## $LIC->setKey() ##
 This method will set the class viarable 'key' that is supposed to hold the license key. Example:
 ```php
