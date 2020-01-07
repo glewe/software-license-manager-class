@@ -114,13 +114,13 @@ class SoftwareLicenseManager
    {
       $parms = array(
          'slm_action' => 'slm_activate',
-         'secret_key' => SECRTE_KEY,
+         'secret_key' => self::SECRET_KEY,
          'license_key' => $this->key,
          'registered_domain' => $_SERVER['SERVER_NAME'],
-         'item_reference' => urlencode(ITEM_REFERENCE),
+         'item_reference' => urlencode(self::ITEM_REFERENCE),
       );
 
-      $response = $this->callAPI('GET', LICENSE_SERVER, $parms);
+      $response = $this->callAPI('GET', self::LICENSE_SERVER, $parms);
       $response = json_decode($response);
 
       return $response;
@@ -180,13 +180,13 @@ class SoftwareLicenseManager
    {
       $parms = array(
          'slm_action' => 'slm_deactivate',
-         'secret_key' => SECRET_KEY,
+         'secret_key' => self::SECRET_KEY,
          'license_key' => $this->key,
          'registered_domain' => $_SERVER['SERVER_NAME'],
-         'item_reference' => urlencode(ITEM_REFERENCE),
+         'item_reference' => urlencode(self::ITEM_REFERENCE),
       );
 
-      $response = $this->callAPI('GET', LICENSE_SERVER, $parms);
+      $response = $this->callAPI('GET', self::LICENSE_SERVER, $parms);
       $response = json_decode($response);
 
       return $response;
@@ -237,10 +237,10 @@ class SoftwareLicenseManager
    {
       $parms = array(
          'slm_action' => 'slm_check',
-         'secret_key' => SECRET_KEY,
+         'secret_key' => self::SECRET_KEY,
          'license_key' => $this->key,
       );
-      $response = $this->callAPI('GET', LICENSE_SERVER, $parms);
+      $response = $this->callAPI('GET', self::LICENSE_SERVER, $parms);
       $response = json_decode($response);
       $this->details = $response;
    }
