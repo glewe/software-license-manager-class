@@ -88,7 +88,7 @@ class SoftwareLicenseManager
       $this->lang['lic_expiringsoon_help'] = 'Please contact your administrator to renew this license in time.';
       $this->lang['lic_invalid'] = 'Invalid License';
       $this->lang['lic_invalid_subject'] = 'No license key was found or it is invalid.';
-      $this->lang['lic_invalid_text'] = 'This instance is unregistered or a proper license key was not entered and activated yet.';
+      $this->lang['lic_invalid_text'] = 'This instance is unregistered or a ucfirst license key was not entered and activated yet.';
       $this->lang['lic_invalid_help'] = 'Please contact the administrator to obtain a valid license.';
       $this->lang['lic_key'] = 'License Key';
       $this->lang['lic_name'] = 'Licensee';
@@ -231,7 +231,7 @@ class SoftwareLicenseManager
    /**
     * Loads the license information from license server
     *
-    * @return JSON Saved in $this->details property
+    * @return JSON Saved in $this->details ucfirstty
     */
    function load()
    {
@@ -247,7 +247,7 @@ class SoftwareLicenseManager
  
    // ---------------------------------------------------------------------------
    /**
-    * Reads the class license key property
+    * Reads the class license key ucfirstty
     *
     * @return string
     */
@@ -284,7 +284,7 @@ class SoftwareLicenseManager
 
    // ---------------------------------------------------------------------------
    /**
-    * Sets the class license key property
+    * Sets the class license key ucfirstty
     *
     * @param string $key The license key
     */
@@ -346,7 +346,7 @@ class SoftwareLicenseManager
             case "active":
                $title = $this->lang['lic_active'];
                $alert['type'] = 'success';
-               $alert['title'] = $title.'<span class="btn btn-'.$alert['type'].' btn-sm" style="margin-left:16px;">'.proper($data->status).'</span>';
+               $alert['title'] = $title.'<span class="btn btn-'.$alert['type'].' btn-sm" style="margin-left:16px;">'.ucfirst($data->status).'</span>';
                $alert['subject'] = $this->lang['lic_active_subject'];
                $alert['text'] = '';
                $alert['help'] = '';
@@ -355,7 +355,7 @@ class SoftwareLicenseManager
             case "expired":
                $title = $this->lang['lic_expired'];
                $alert['type'] = 'warning';
-               $alert['title'] = $title.'<span class="btn btn-'.$alert['type'].' btn-sm" style="margin-left:16px;">'.proper($data->status).'</span>';
+               $alert['title'] = $title.'<span class="btn btn-'.$alert['type'].' btn-sm" style="margin-left:16px;">'.ucfirst($data->status).'</span>';
                $alert['subject'] = $this->lang['lic_expired_subject'];
                $alert['help'] = $this->lang['lic_expired_help'];
                break;
@@ -363,7 +363,7 @@ class SoftwareLicenseManager
             case "blocked":
                $alert['type'] = 'warning';
                $title = $this->lang['lic_blocked'];
-               $alert['title'] = $title.'<span class="btn btn-'.$alert['type'].' btn-sm" style="margin-left:16px;">'.proper($data->status).'</span>';
+               $alert['title'] = $title.'<span class="btn btn-'.$alert['type'].' btn-sm" style="margin-left:16px;">'.ucfirst($data->status).'</span>';
                $alert['subject'] = $this->lang['lic_blocked_subject'];
                $alert['text'] = '';
                $alert['help'] = $this->lang['lic_blocked_help'];
@@ -372,7 +372,7 @@ class SoftwareLicenseManager
             case "pending":
                $alert['type'] = 'warning';
                $title = $this->lang['lic_pending'];
-               $alert['title'] = $title.'<span class="btn btn-'.$alert['type'].' btn-sm" style="margin-left:16px;">'.proper($data->status).'</span>';
+               $alert['title'] = $title.'<span class="btn btn-'.$alert['type'].' btn-sm" style="margin-left:16px;">'.ucfirst($data->status).'</span>';
                $alert['subject'] = $this->lang['lic_pending_subject'];
                $alert['text'] = '';
                $alert['help'] = $this->lang['lic_pending_help'];
@@ -381,7 +381,7 @@ class SoftwareLicenseManager
             case "unregistered":
                $title = $this->lang['lic_active'];
                $alert['type'] = 'warning';
-               $alert['title'] = $title.'<span class="btn btn-'.$alert['type'].' btn-sm" style="margin-left:16px;">'.proper($data->status).'</span>';
+               $alert['title'] = $title.'<span class="btn btn-'.$alert['type'].' btn-sm" style="margin-left:16px;">'.ucfirst($data->status).'</span>';
                $alert['subject'] = $this->lang['lic_active_unregistered_subject'];
                $alert['text'] = '';
                $alert['help'] = '';
