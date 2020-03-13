@@ -122,6 +122,10 @@ class SoftwareLicenseManager
 
       $response = $this->callAPI('GET', self::LICENSE_SERVER, $parms);
       $response = json_decode($response);
+      
+      if ( ! $response ){
+          $response = (object) array('result' => 'error','message' => 'Unexpected Error! The query returned with an error.');
+      }
 
       return $response;
    }
@@ -188,6 +192,10 @@ class SoftwareLicenseManager
 
       $response = $this->callAPI('GET', self::LICENSE_SERVER, $parms);
       $response = json_decode($response);
+      
+      if ( ! $response ){
+          $response = (object) array('result' => 'error','message' => 'Unexpected Error! The query returned with an error.');
+      }
 
       return $response;
    }
