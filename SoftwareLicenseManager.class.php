@@ -1,62 +1,89 @@
 <?php
 /**
- * Software License Manager
+ * Software License Manager.
  *
- * @author George Lewe <george@lewe.com>
- * @version 1.0.0
- * @source https://github.com/glewe/software-license-manager-class
- * @license https://www.gnu.org/licenses/gpl-3.0.txt
- */
-
-/**
+ * @since       1.1.0
+ * @package     Software License Manager
+ * @subpackage  WP Connector Class
+ * @author      George Lewe <george@lewe.com>
+ * @source      https://github.com/glewe/software-license-manager-class
+ * @license     https://www.gnu.org/licenses/gpl-3.0.txt
+ * 
  * You can use this class in any PHP application to communicate with a WordPress
  * based license server using the Software License Manager plugin:
  * https://www.tipsandtricks-hq.com/software-license-manager-plugin-for-wordpress
+ * 
  */
-class SoftwareLicenseManager
-{
-   //
-   // This variable specifies the value which is set in the license manager 
-   // plugin settings page as: "Secret Key for License Verification Requests".
-   //
+class SoftwareLicenseManager {
+
+	/**
+	 * The secret key.
+    *
+    * This variable specifies the value which is set in the license manager 
+    * plugin settings page as: "Secret Key for License Verification Requests".
+    *
+	 * @since    1.0.0
+	 * @const    SECRET_KEY    The host REST URI
+	 */
    const SECRET_KEY = '5421048138b321.90068894';
 
-   //
-   // This variable specifies the URL of your server where the license manager
-   // plugin is installed on. Your plugin from a customer’s site will be 
-   // communicating with this server to activate or deactivate license keys.
-   //
+   /**
+	 * The license server URL.
+    *
+    * This variable specifies the URL of your server where the license manager
+    * plugin is installed on. Your plugin from a customer’s site will be 
+    * communicating with this server to activate or deactivate license keys.
+    *
+	 * @since    1.0.0
+	 * @const    LICENSE_SERVER    The host REST URI
+    */
    const LICENSE_SERVER = 'https://mylicenseserver.com';
 
-   //
-   // This variable provides a reference label for the licenses which will be 
-   // issued. Therefore you should enter something specific to describe what 
-   // the licenses issued are pertaining to.
-   //
-   const ITEM_REFERENCE = 'My Licensed Item';
+   /**
+    * This variable provides a reference label for the licenses which will be 
+    * issued. Therefore you should enter something specific to describe what 
+    * the licenses issued are pertaining to.
+    *
+	 * @since    1.0.0
+	 * @const    ITEM_REFERENCE    The host REST URI
+    */
+    const ITEM_REFERENCE = 'My Licensed Item';
    
-   //
-   // Private variable holding the linces key itself.
-   // Set with setKey(), read with getKey() method.
-   //
+	/**
+	 * The license key.
+    * Private variable holding the linces key itself.
+    * Set with setKey(), read with getKey() method.
+	 *
+	 * @since    1.0.0
+	 * @access   private
+	 * @var      string    $key    The license key
+	 */
    private $key = '';
 
-   //
-   // Language array for thje details display
-   //
+	/**
+	 * Language array for thje details display.
+	 *
+	 * @since    1.0.0
+	 * @access   private
+	 * @var      array    $lang    The license key
+	 */
    private $lang = array();
 
-   //
-   // JSON reponse from the license server
-   //
+	/**
+	 * JSON reponse from the license server.
+	 *
+	 * @since    1.0.0
+	 * @access   public
+	 * @var      JSON    $details    JSON reposnse
+	 */
    public $details;
 
    // ---------------------------------------------------------------------
    /**
     * Constructor
     */
-   public function __construct()
-   {
+   public function __construct() {
+
       //
       // Fill language array
       //
@@ -102,6 +129,7 @@ class SoftwareLicenseManager
       $this->lang['lic_unregistered'] = 'Unregistered License';
       $this->lang['lic_unregistered_subject'] = 'The license key of this instance is not registered for this domain.';
       $this->lang['lic_unregistered_help'] = 'Please contact the administrator to register this domain or obtain a valid license.';
+
    }
 
    // ---------------------------------------------------------------------------
@@ -110,8 +138,8 @@ class SoftwareLicenseManager
     *
     * @return JSON
     */
-   function activate()
-   {
+   function activate() {
+
       $parms = array(
          'slm_action' => 'slm_activate',
          'secret_key' => SECRTE_KEY,
@@ -123,7 +151,14 @@ class SoftwareLicenseManager
       $response = $this->callAPI('GET', LICENSE_SERVER, $parms);
       $response = json_decode($response);
 
+      if ( !$response ) {
+
+         $response = (object) array('result' => 'error','message' => 'Unexpected Error! The activation request returned with an error.');
+
+      }
+
       return $response;
+
    }
 
    // ---------------------------------------------------------------------------
@@ -135,23 +170,26 @@ class SoftwareLicenseManager
     * @param array  $parms   URL paramater: array("param" => "value") ==> index.php?param=value
     * @return JSON
     */
-   function callAPI($method, $url, $data = false)
-   {
+   function callAPI($method, $url, $data = false) {
+
       $curl = curl_init();
 
-      switch (strtoupper($method))
-      {
+      switch (strtoupper($method)) {
+
          case "POST":
             curl_setopt($curl, CURLOPT_POST, 1);
             if ($data)
                curl_setopt($curl, CURLOPT_POSTFIELDS, $data);
             break;
+
          case "PUT":
             curl_setopt($curl, CURLOPT_PUT, 1);
             break;
+
          default:
             if ($data)
                $url = sprintf("%s?%s", $url, http_build_query($data));
+
       }
 
       // Optional Authentication:
@@ -168,6 +206,7 @@ class SoftwareLicenseManager
       curl_close($curl);
 
       return $result;
+
    }
 
    // ---------------------------------------------------------------------------
@@ -176,8 +215,8 @@ class SoftwareLicenseManager
     *
     * @return JSON
     */
-   function deactivate()
-   {
+   function deactivate() {
+
       $parms = array(
          'slm_action' => 'slm_deactivate',
          'secret_key' => SECRET_KEY,
@@ -189,6 +228,12 @@ class SoftwareLicenseManager
       $response = $this->callAPI('GET', LICENSE_SERVER, $parms);
       $response = json_decode($response);
 
+      if ( !$response ) {
+
+         $response = (object) array('result' => 'error','message' => 'Unexpected Error! The deactivation request returned with an error.');
+
+      }
+
       return $response;
    }
 
@@ -198,19 +243,26 @@ class SoftwareLicenseManager
     *
     * @return boolean
     */
-   function domainRegistered()
-   {
+   function domainRegistered() {
+
       // if (!$this->readKey()) return false; // Enable if using the readKey() method
 
       if (count($this->details->registered_domains)) {
+
          foreach($this->details->registered_domains as $domain) {
+
             if ($domain->registered_domain == $_SERVER['SERVER_NAME']) return true;
+
          }
+
          return false;
-      }
-      else {
+
+      } else {
+
          return false;
+
       }
+
    }
  
    // ---------------------------------------------------------------------------
@@ -219,12 +271,14 @@ class SoftwareLicenseManager
     *
     * @return integer
     */
-   function daysToExpiry()
-   {
+   function daysToExpiry() {
+
       $todayDate = new DateTime('now');
       $expiryDate = new DateTime($this->details->date_expiry);
       $daysToExpiry = $todayDate->diff($expiryDate);
+
       return intval($daysToExpiry->format('%R%a'));
+
    }
 
    // ---------------------------------------------------------------------------
@@ -233,15 +287,23 @@ class SoftwareLicenseManager
     *
     * @return JSON Saved in $this->details property
     */
-   function load()
-   {
+   function load() {
+
       $parms = array(
          'slm_action' => 'slm_check',
          'secret_key' => SECRET_KEY,
          'license_key' => $this->key,
       );
+
       $response = $this->callAPI('GET', LICENSE_SERVER, $parms);
       $response = json_decode($response);
+
+      if ( !$response ) {
+
+         $response = (object) array('result' => 'error','message' => 'Unexpected Error! The load request returned with an error.');
+
+      }
+
       $this->details = $response;
    }
  
@@ -251,35 +313,38 @@ class SoftwareLicenseManager
     *
     * @return string
     */
-   function getKey()
-   {
+   function getKey() {
+
       return $this->key;
+
    }
 
    // ---------------------------------------------------------------------
    /**
     * Reads the license key from the database
     */
-   function readKey()
-   {
+   function readKey() {
+
       //
       // You may want to use this method to read the license key from elsewhere
       // e.g. from a database with this pseudo code
       // $this->key = read_key_from_db();
       //
+
    }
    
    // ---------------------------------------------------------------------
    /**
     * Saves the license key to the database
     */
-   function saveKey($value)
-   {
+   function saveKey($value) {
+
       //
       // You may want to use this method to save the license key elsewhere
       // e.g. to a database with this pseudo code
       // save_key_to_db($this->key);
       //
+
    }
 
    // ---------------------------------------------------------------------------
@@ -288,9 +353,10 @@ class SoftwareLicenseManager
     *
     * @param string $key The license key
     */
-   function setKey($key)
-   {
+   function setKey($key) {
+
       $this->key = $key;
+
    }
  
    // ---------------------------------------------------------------------------
@@ -298,34 +364,43 @@ class SoftwareLicenseManager
     * Creates a table with license details and displays it inside a Bootstrap
     * alert box. This method assumes that your application uses Bootstrap 4.
     *
-    * @param string $type  Type of information: notfound, invalid, details
-    * @param array $data   License information array
-    * @return string HTML
+    * @param    string    $type    Type of information: notfound, invalid, details
+    * @param    array     $data    License information array
+    * @return   string    HTML
     */
-   function show($data, $showDetails=false)
-   {
-      if (isset($data->result) && $data->result=="error")
-      {
+   function show($data, $showDetails=false) {
+
+      if (isset($data->result) && $data->result=="error") {
+
          $alert['type'] = 'danger';
          $alert['title'] = $this->lang['lic_invalid'];
          $alert['subject'] = $this->lang['lic_invalid_subject'];
          $alert['text'] = $this->lang['lic_invalid_text'];
          $alert['help'] = $this->lang['lic_invalid_help'];
          $details = "";
-      }
-      else
-      {
+
+      } else {
+
          $domains = "";
+
          if (count($data->registered_domains)) {
+
             foreach ($data->registered_domains as $domain) {
+
                $domains .= $domain->registered_domain.', ';
+
             }
+
             $domains = substr($domains, 0, -2); // Remove last comma and blank
+
          }
 
          $daysleft = "";
+
          if ($daysToExpiry=$this->daysToExpiry()) {
+
             $daysleft = " (".$daysToExpiry." ".$this->lang['lic_daysleft'].")";
+
          }
 
          $details = "<div style=\"height:20px;\"></div>";
@@ -408,11 +483,12 @@ class SoftwareLicenseManager
     *
     * @return string  active/blocked/invalid/expired/pending/unregistered
     */
-   function status()
-   {
+   function status() {
+
       if ($this->details->result=='error') return "invalid";
 
       switch ($this->details->status) {
+
          case "active":
             if (!$this->domainRegistered()) return 'unregistered';
             return 'active';
@@ -429,7 +505,10 @@ class SoftwareLicenseManager
          case "pending":
             return 'pending';
             break;
+
       }
+
    }
+
 }
 ?>
