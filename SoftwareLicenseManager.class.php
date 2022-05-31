@@ -3,7 +3,7 @@
 /**
  * Software License Manager.
  *
- * @since       1.1.0
+ * @since       1.1.1
  * @package     Software License Manager
  * @subpackage  WP Connector Class
  * @author      George Lewe <george@lewe.com>
@@ -15,6 +15,7 @@
  * https://www.tipsandtricks-hq.com/software-license-manager-plugin-for-wordpress
  * 
  */
+
 class SoftwareLicenseManager
 {
     /**
@@ -23,8 +24,8 @@ class SoftwareLicenseManager
      * This variable specifies the value which is set in the license manager 
      * plugin settings page as: "Secret Key for License Verification Requests".
      *
-     * @since    1.0.0
-     * @const    SECRET_KEY    The host REST URI
+     * @since 1.0.0
+     * @var SECRET_KEY The host REST URI
      */
     const SECRET_KEY = '5421048138b321.90068894';
 
@@ -35,8 +36,8 @@ class SoftwareLicenseManager
      * plugin is installed on. Your plugin from a customer’s site will be 
      * communicating with this server to activate or deactivate license keys.
      *
-     * @since    1.0.0
-     * @const    LICENSE_SERVER    The host REST URI
+     * @since 1.0.0
+     * @var LICENSE_SERVER The host REST URI
      */
     const LICENSE_SERVER = 'https://mylicenseserver.com';
 
@@ -45,8 +46,8 @@ class SoftwareLicenseManager
      * issued. Therefore you should enter something specific to describe what 
      * the licenses issued are pertaining to.
      *
-     * @since    1.0.0
-     * @const    ITEM_REFERENCE    The host REST URI
+     * @since 1.0.0
+     * @var ITEM_REFERENCE The host REST URI
      */
     const ITEM_REFERENCE = 'My Licensed Item';
 
@@ -55,27 +56,27 @@ class SoftwareLicenseManager
      * Private variable holding the linces key itself.
      * Set with setKey(), read with getKey() method.
      *
-     * @since    1.0.0
-     * @access   private
-     * @var      string    $key    The license key
+     * @since 1.0.0
+     * @access private
+     * @var string $key The license key
      */
     private $key = '';
 
     /**
      * Language array for thje details display.
      *
-     * @since    1.0.0
-     * @access   private
-     * @var      array    $lang    The license key
+     * @since 1.0.0
+     * @access private
+     * @var array $lang The license key
      */
     private $lang = array();
 
     /**
      * JSON reponse from the license server.
      *
-     * @since    1.0.0
-     * @access   public
-     * @var      JSON    $details    JSON reposnse
+     * @since 1.0.0
+     * @access public
+     * @var JSON $details JSON reposnse
      */
     public $details;
 
@@ -152,7 +153,6 @@ class SoftwareLicenseManager
         $response = json_decode((string)$response);
 
         if (!$response) {
-
             $response = (object) array('result' => 'error', 'message' => 'Unexpected Error! The activation request returned with an error.');
         }
 
@@ -173,17 +173,14 @@ class SoftwareLicenseManager
         $curl = curl_init();
 
         switch (strtoupper($method)) {
-
             case "POST":
                 curl_setopt($curl, CURLOPT_POST, 1);
                 if ($data)
                     curl_setopt($curl, CURLOPT_POSTFIELDS, $data);
                 break;
-
             case "PUT":
                 curl_setopt($curl, CURLOPT_PUT, 1);
                 break;
-
             default:
                 if ($data)
                     $url = sprintf("%s?%s", $url, http_build_query($data));
@@ -213,7 +210,6 @@ class SoftwareLicenseManager
      */
     function deactivate()
     {
-
         $parms = array(
             'slm_action' => 'slm_deactivate',
             'secret_key' => self::SECRET_KEY,
@@ -240,7 +236,6 @@ class SoftwareLicenseManager
      */
     function domainRegistered()
     {
-
         // if (!$this->readKey()) return false; // Enable if using the readKey() method
 
         if (count($this->details->registered_domains)) {
@@ -341,8 +336,8 @@ class SoftwareLicenseManager
      * Creates a table with license details and displays it inside a Bootstrap
      * alert box. This method assumes that your application uses Bootstrap 4.
      *
-     * @param    object    $data    License information array
-     * @return   string    HTML
+     * @param object $data License information array
+     * @return string HTML
      */
     function show($data, $showDetails = false)
     {
@@ -368,16 +363,16 @@ class SoftwareLicenseManager
 
             $details = "<div style=\"height:20px;\"></div>";
             $details .= "<table class=\"table table-hover\">
-         <tr><th>" . $this->lang['lic_product'] . ":</th><td>" . $data->product_ref . "</td></tr>
-         <tr><th>" . $this->lang['lic_key'] . ":</th><td>" . $data->license_key . "</td></tr>
-         <tr><th>" . $this->lang['lic_name'] . ":</th><td>" . $data->first_name . " " . $data->last_name . "</td></tr>
-         <tr><th>" . $this->lang['lic_email'] . ":</th><td>" . $data->email . "</td></tr>
-         <tr><th>" . $this->lang['lic_company'] . ":</th><td>" . $data->company_name . "</td></tr>
-         <tr><th>" . $this->lang['lic_date_created'] . ":</th><td>" . $data->date_created . "</td></tr>
-         <tr><th>" . $this->lang['lic_date_renewed'] . ":</th><td>" . $data->date_renewed . "</td></tr>
-         <tr><th>" . $this->lang['lic_date_expiry'] . ":</th><td>" . $data->date_expiry . $daysleft . "</td></tr>
-         <tr><th>" . $this->lang['lic_registered_domains'] . ":</th><td>" . $domains . "</td></tr>
-         </table>";
+                <tr><th>" . $this->lang['lic_product'] . ":</th><td>" . $data->product_ref . "</td></tr>
+                <tr><th>" . $this->lang['lic_key'] . ":</th><td>" . $data->license_key . "</td></tr>
+                <tr><th>" . $this->lang['lic_name'] . ":</th><td>" . $data->first_name . " " . $data->last_name . "</td></tr>
+                <tr><th>" . $this->lang['lic_email'] . ":</th><td>" . $data->email . "</td></tr>
+                <tr><th>" . $this->lang['lic_company'] . ":</th><td>" . $data->company_name . "</td></tr>
+                <tr><th>" . $this->lang['lic_date_created'] . ":</th><td>" . $data->date_created . "</td></tr>
+                <tr><th>" . $this->lang['lic_date_renewed'] . ":</th><td>" . $data->date_renewed . "</td></tr>
+                <tr><th>" . $this->lang['lic_date_expiry'] . ":</th><td>" . $data->date_expiry . $daysleft . "</td></tr>
+                <tr><th>" . $this->lang['lic_registered_domains'] . ":</th><td>" . $domains . "</td></tr>
+                </table>";
 
             switch ($this->status()) {
                 case "active":
@@ -454,15 +449,12 @@ class SoftwareLicenseManager
                 if (!$this->domainRegistered()) return 'unregistered';
                 return 'active';
                 break;
-
             case "expired":
                 return 'expired';
                 break;
-
             case "blocked":
                 return 'blocked';
                 break;
-
             case "pending":
                 return 'pending';
                 break;
