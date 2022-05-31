@@ -47,7 +47,7 @@ class SoftwareLicenseManager
      * the licenses issued are pertaining to.
      *
      * @since 1.0.0
-     * @var ITEM_REFERENCE The host REST URI
+     * @var ITEM_REFERENCE The licensed product or item
      */
     const ITEM_REFERENCE = 'My Licensed Item';
 
@@ -348,7 +348,8 @@ class SoftwareLicenseManager
             $alert['text'] = $this->lang['lic_invalid_text'];
             $alert['help'] = $this->lang['lic_invalid_help'];
             $details = "";
-        } else {
+        } else 
+        {
             $domains = "";
             if (count($data->registered_domains)) {
                 foreach ($data->registered_domains as $domain) {
