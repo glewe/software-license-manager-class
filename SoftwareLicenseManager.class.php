@@ -422,14 +422,14 @@ class SoftwareLicenseManager
         }
 
         $alertBox = '
-         <div class="alert alert-dismissable alert-' . $alert['type'] . '">
+        <div class="alert alert-dismissable alert-' . $alert['type'] . '">
             <button type="button" class="close" data-dismiss="alert" title="' . $this->lang['close_this_message'] . '"><i class="far fa-times-circle"></i></button>
             <h4><strong>' . $alert['title'] . '</strong></h4>
             <hr>
             <p><strong>' . $alert['subject'] . '</strong></p>
             <p>' . $alert['text'] . '</p>
             ' . (strlen($alert['help']) ? "<p><i>" . $alert['help'] . "</i></p>" : "") . (($showDetails) ? $details : '') . '
-         </div>';
+        </div>';
 
         return $alertBox;
     }
@@ -438,7 +438,7 @@ class SoftwareLicenseManager
     /**
      * Get license status.
      *
-     * @return string  active/blocked/invalid/expired/pending/unregistered
+     * @return string active/blocked/invalid/expired/pending/unregistered
      */
     function status()
     {
